@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>হরেক রকম হাট - আপনার অনলাইন বাজার</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Hind Siliguri for beautiful Bengali typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10B981;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Top Bar with Contact Info -->
+    <div class="bg-emerald-700 text-white text-xs md:text-sm py-2 px-4 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-4 flex-wrap">
+                <a href="tel:01752532021" class="flex items-center gap-1 hover:text-emerald-200 transition">
+                    <i class="fas fa-phone-alt"></i> <span>01752532021</span>
+                </a>
+                <a href="https://wa.me/8801706998161" target="_blank" class="flex items-center gap-1 hover:text-emerald-200 transition">
+                    <i class="fab fa-whatsapp text-lg text-emerald-300"></i> <span>01706998161</span>
+                </a>
+                <span class="hidden md:inline-block text-emerald-300">|</span>
+                <span class="bg-emerald-800 text-emerald-100 px-2 py-0.5 rounded-full text-xs font-semibold animate-pulse">
+                    <i class="fas fa-check-circle mr-1"></i> যেকোনো পণ্য অর্ডার নেওয়া হয়
+                </span>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="https://www.facebook.com/profile.php?id=61594700879328" target="_blank" class="hover:text-emerald-200 flex items-center gap-1 bg-emerald-800 hover:bg-emerald-900 px-2.5 py-1 rounded-full transition text-xs">
+                    <i class="fab fa-facebook-f"></i> <span>ফেসবুক পেজ</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md shadow-md border-b border-emerald-100">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <!-- Brand Logo / Name -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-amber-400 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-emerald-200 group-hover:scale-105 transition duration-300">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-800 leading-tight">
+                        হরেক রকম <span class="text-emerald-600">হাট</span>
+                    </h1>
+                    <p class="text-xs text-amber-600 font-semibold tracking-wide">আপনার অনলাইন বাজার</p>
+                </div>
+            </a>
+
+            <!-- Search Bar (Desktop) -->
+            <div class="hidden md:flex flex-1 max-w-md mx-6 relative">
+                <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="পণ্য খুঁজুন (যেমন: শাড়ি, হেডফোন, স্মার্টওয়াচ)..." class="w-full bg-slate-100 border border-slate-200 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white text-sm transition">
+                <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Cart Trigger & Action -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleCartModal()" class="relative bg-emerald-50 hover:bg-emerald-100 text-emerald-700 p-2.5 rounded-xl transition flex items-center gap-2 border border-emerald-200">
+                    <i class="fas fa-shopping-cart text-lg"></i>
+                    <span class="hidden sm:inline font-semibold text-sm">কার্ট</span>
+                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-rose-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Search Bar -->
+        <div class="md:hidden px-4 pb-3 pt-1">
+            <div class="relative">
+                <input type="text" id="searchInputMobile" onkeyup="filterProductsMobile()" placeholder="পণ্য খুঁজুন..." class="w-full bg-slate-100 border border-slate-200 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section (Digital Cover Replica) -->
+    <section class="max-w-7xl mx-auto px-4 my-6">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-800 via-teal-700 to-emerald-900 text-white shadow-2xl border border-emerald-600/30">
+            <!-- Background Decorative Elements -->
+            <div class="absolute -right-20 -top-20 w-80 h-80 bg-amber-400/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-teal-400/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 p-6 md:p-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <!-- Banner Main Content -->
+                <div class="md:col-span-7 space-y-4 text-center md:text-left">
+                    <div class="inline-block bg-amber-400/20 border border-amber-300/40 text-amber-200 text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full backdrop-blur-md">
+                        <i class="fas fa-bullhorn text-amber-300 mr-2"></i>১০০% বিশ্বস্ত অনলাইন শপ
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-sm">
+                        হরেক রকম হাট
+                        <span class="block text-amber-300 text-xl md:text-3xl mt-1 font-semibold">আপনার অনলাইন বাজার</span>
+                    </h2>
+                    
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 p-3.5 rounded-2xl inline-block my-2">
+                        <p class="text-emerald-100 font-bold text-base md:text-xl flex items-center justify-center md:justify-start gap-2">
+                            <i class="fas fa-star text-amber-400"></i>
+                            যেকোনো পণ্য অর্ডার নেওয়া হয়
+                        </p>
+                    </div>
+
+                    <p class="text-slate-200 text-sm md:text-base leading-relaxed max-w-lg">
+                        আমাদের কাছে পাচ্ছেন উন্নতমানের গ্যাজেট, ফ্যাশন আইটেম, হোম ডেকোর এবং দৈনন্দিন নিত্যপ্রয়োজনীয় সব পণ্য। আপনার পছন্দের পণ্যটি আজই অর্ডার করুন!
+                    </p>
+
+                    <div class="pt-2 flex flex-wrap justify-center md:justify-start gap-3">
+                        <a href="#products" class="bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold px-6 py-3 rounded-xl transition transform hover:-translate-y-0.5 shadow-lg shadow-amber-400/20 text-sm md:text-base">
+                            <i class="fas fa-shopping-basket mr-2"></i>কেনাকাটা শুরু করুন
+                        </a>
+                        <a href="https://wa.me/8801706998161?text=হ্যালো!%20আমি%20হরেক%20রকম%20হাট%20থেকে%20পণ্য%20অর্ডার%20করতে%20চাই।" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 border border-emerald-400 text-white font-bold px-5 py-3 rounded-xl transition flex items-center gap-2 text-sm md:text-base shadow-lg">
+                            <i class="fab fa-whatsapp text-xl text-emerald-200"></i> সরাসরি হোয়াটসঅ্যাপ
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Banner Right Highlight Box (Simulating Page Cover Layout) -->
+                <div class="md:col-span-5 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-inner text-white">
+                    <h3 class="text-lg font-bold text-amber-300 border-b border-white/20 pb-2 mb-4 text-center">
+                        <i class="fas fa-layer-group mr-2"></i>আমাদের মূল ক্যাটাগরি সমূহ
+                    </h3>
+                    
+                    <div class="grid grid-cols-2 gap-3 text-xs md:text-sm">
+                        <div class="bg-white/10 p-3 rounded-xl hover:bg-white/20 transition flex items-center gap-3 border border-white/10">
+                            <div class="w-9 h-9 rounded-lg bg-indigo-500/80 flex items-center justify-center text-white text-lg">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold block">গ্যাজেট</span>
+                                <span class="text-slate-300 text-[10px]">ফোন, ঘড়ি, হেডফোন</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/10 p-3 rounded-xl hover:bg-white/20 transition flex items-center gap-3 border border-white/10">
+                            <div class="w-9 h-9 rounded-lg bg-pink-500/80 flex items-center justify-center text-white text-lg">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold block">ফ্যাশন</span>
+                                <span class="text-slate-300 text-[10px]">শাড়ি, পাঞ্জাবি, জামা</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/10 p-3 rounded-xl hover:bg-white/20 transition flex items-center gap-3 border border-white/10">
+                            <div class="w-9 h-9 rounded-lg bg-amber-500/80 flex items-center justify-center text-white text-lg">
+                                <i class="fas fa-couch"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold block">হোম ডেকোর</span>
+                                <span class="text-slate-300 text-[10px]">ওয়াল আর্ট, কুশন</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/10 p-3 rounded-xl hover:bg-white/20 transition flex items-center gap-3 border border-white/10">
+                            <div class="w-9 h-9 rounded-lg bg-emerald-500/80 flex items-center justify-center text-white text-lg">
+                                <i class="fas fa-shopping-basket"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold block">নিত্যপ্রয়োজনীয়</span>
+                                <span class="text-slate-300 text-[10px]">গ্রোসারি ও অনিয়মিত</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Footnote on Banner -->
+                    <div class="mt-4 pt-3 border-t border-white/15 flex justify-between items-center text-xs text-emerald-100">
+                        <span><i class="fas fa-phone mr-1"></i>01752532021</span>
+                        <span><i class="fab fa-whatsapp mr-1 text-emerald-300"></i>01706998161</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter Bar -->
+    <section class="max-w-7xl mx-auto px-4 my-8">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl md:text-2xl font-bold text-slate-800 flex items-center gap-2">
+                <i class="fas fa-th-large text-emerald-600"></i> পণ্য ক্যাটাগরি
+            </h3>
+            <span class="text-xs md:text-sm text-slate-500">পছন্দের ক্যাটাগরি নির্বাচন করুন</span>
+        </div>
+
+        <div class="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none" id="categoryContainer">
+            <button onclick="selectCategory('all')" class="cat-btn active flex-shrink-0 bg-emerald-600 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition shadow-sm hover:shadow">
+                <i class="fas fa-globe mr-1.5"></i> সব পণ্য
+            </button>
+            <button onclick="selectCategory('gadgets')" class="cat-btn flex-shrink-0 bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-semibold px-5 py-2.5 rounded-xl text-sm border border-slate-200 transition shadow-sm">
+                <i class="fas fa-headphones text-indigo-500 mr-1.5"></i> গ্যাজেট (Gadgets)
+            </button>
+            <button onclick="selectCategory('fashion')" class="cat-btn flex-shrink-0 bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-semibold px-5 py-2.5 rounded-xl text-sm border border-slate-200 transition shadow-sm">
+                <i class="fas fa-[#ec4899] fa-user-ninja text-pink-500 mr-1.5"></i> ফ্যাশন (Fashion)
+            </button>
+            <button onclick="selectCategory('homedecor')" class="cat-btn flex-shrink-0 bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-semibold px-5 py-2.5 rounded-xl text-sm border border-slate-200 transition shadow-sm">
+                <i class="fas fa-home text-amber-500 mr-1.5"></i> হোম ডেকোর (Home Decor)
+            </button>
+            <button onclick="selectCategory('essentials')" class="cat-btn flex-shrink-0 bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-semibold px-5 py-2.5 rounded-xl text-sm border border-slate-200 transition shadow-sm">
+                <i class="fas fa-shopping-bag text-emerald-500 mr-1.5"></i> নিত্যপ্রয়োজনীয় (Essential)
+            </button>
+        </div>
+    </section>
+
+    <!-- Product Grid Section -->
+    <main id="products" class="max-w-7xl mx-auto px-4 mb-16 flex-grow">
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- JavaScript will dynamically render products here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="noProductsFound" class="hidden text-center py-16 bg-white rounded-3xl shadow-sm border border-slate-100 my-6">
+            <i class="fas fa-search-minus text-5xl text-slate-300 mb-3"></i>
+            <h4 class="text-lg font-bold text-slate-600">কোনো পণ্য পাওয়া যায়নি</h4>
+            <p class="text-sm text-slate-400 mt-1">অন্য কোনো নাম দিয়ে সন্ধান করুন অথবা অন্য ক্যাটাগরি বেছে নিন।</p>
+        </div>
+    </main>
+
+    <!-- Custom Order Callout Banner -->
+    <section class="max-w-7xl mx-auto px-4 mb-16">
+        <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-3xl p-6 md:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+            <div class="space-y-2 text-center md:text-left">
+                <span class="bg-white/20 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">স্পেশাল সার্ভিস</span>
+                <h3 class="text-2xl md:text-3xl font-extrabold">পছন্দের যেকোনো পণ্য খুঁজে পাচ্ছেন না?</h3>
+                <p class="text-amber-100 text-sm md:text-base max-w-xl">
+                    আমাদের জানান! আমরা আপনার চাহিদা অনুযায়ী "হরেক রকম হাট" এর মাধ্যমে সরাসরি যেকোনো পণ্য সংগ্রহ করে ডেলিভারি দিয়ে থাকি।
+                </p>
+            </div>
+            <a href="https://wa.me/8801706998161?text=হ্যালো!%20আমি%20বিশেষ%20একটি%20পণ্য%20অর্ডার%20করতে%20চাই।" target="_blank" class="bg-slate-900 hover:bg-black text-amber-300 font-bold px-6 py-3.5 rounded-xl transition flex items-center gap-2 flex-shrink-0 shadow-lg text-sm md:text-base">
+                <i class="fab fa-whatsapp text-xl text-emerald-400"></i> স্পেশাল পণ্য অর্ডার করুন
+            </a>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Modal Overlay -->
+    <div id="cartModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden transition-opacity flex justify-end">
+        <div class="bg-white w-full max-w-md h-full flex flex-col shadow-2xl animate-slide-left">
+            <!-- Cart Header -->
+            <div class="p-4 bg-emerald-700 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-shopping-basket text-xl"></i>
+                    <h3 class="font-bold text-lg">আপনার শপিং কার্ট</h3>
+                </div>
+                <button onclick="toggleCartModal()" class="text-emerald-200 hover:text-white p-1 rounded-lg">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cartItemsContainer" class="flex-grow overflow-y-auto p-4 space-y-3">
+                <!-- Dynamically populated by JS -->
+            </div>
+
+            <!-- Cart Summary & Order Form -->
+            <div class="p-4 border-t border-slate-200 bg-slate-50 space-y-3">
+                <div class="flex justify-between items-center text-slate-700 text-sm">
+                    <span>মোট পণ্যের সংখ্যা:</span>
+                    <span id="cartTotalItems" class="font-bold">0 টি</span>
+                </div>
+                <div class="flex justify-between items-center text-slate-900 font-bold text-lg border-b pb-2">
+                    <span>সর্বমোট মূল্য:</span>
+                    <span id="cartTotalPrice" class="text-emerald-700">৳ 0</span>
+                </div>
+
+                <!-- Customer Details Form for Quick Order -->
+                <div class="space-y-2 pt-1">
+                    <label class="text-xs font-semibold text-slate-600 block">আপনার নাম ও ডেলিভারি ঠিকানা:</label>
+                    <input type="text" id="custName" placeholder="আপনার নাম" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    <input type="tel" id="custPhone" placeholder="মোবাইল নম্বর" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    <textarea id="custAddress" placeholder="পূর্ণাঙ্গ ঠিকানা (গ্রাম/মহল্লা, থানা, জেলা)" rows="2" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+                </div>
+
+                <!-- Order via WhatsApp Button -->
+                <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fab fa-whatsapp text-xl"></i> হোয়াটসঅ্যাপে নিশ্চিত অর্ডার পাঠান
+                </button>
+                <p class="text-[11px] text-slate-500 text-center">অর্ডার বাটনে ক্লিক করলে আপনার তথ্য সহ সরাসরি হোয়াটসঅ্যাপে মেসেজ চলে যাবে।</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-900 text-slate-300 pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <!-- Brand Info -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white text-xl font-bold">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">হরেক রকম হাট</h3>
+                </div>
+                <p class="text-sm text-slate-400 leading-relaxed">
+                    আপনার অনলাইন বাজার - আপনার দৈনন্দিন কেনাকাটা সহজ করতে সব সময় পাশে আছে হরেক রকম হাট। গ্যাজেট, ফ্যাশন, হোম ডেকোর ও নিত্যপ্রয়োজনীয় পণ্য নিয়ে বিশ্বস্ত সেবা।
+                </p>
+                <div class="inline-block bg-emerald-950 border border-emerald-800 text-emerald-400 text-xs px-3 py-1.5 rounded-lg">
+                    <i class="fas fa-truck mr-1"></i> সারা বাংলাদেশে ক্যাশ অন ডেলিভারি
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="space-y-3">
+                <h4 class="text-white font-bold border-b border-slate-800 pb-2 text-base">যোগাযোগের ঠিকানা</h4>
+                <ul class="space-y-2 text-sm">
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-phone text-emerald-500 w-5"></i>
+                        <span>মোবাইল: <a href="tel:01752532021" class="text-white hover:underline">01752532021</a></span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-emerald-400 text-lg w-5"></i>
+                        <span>হোয়াটসঅ্যাপ: <a href="https://wa.me/8801706998161" target="_blank" class="text-white hover:underline">01706998161</a></span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fab fa-facebook text-blue-500 text-lg w-5"></i>
+                        <span>ফেসবুক: <a href="https://www.facebook.com/profile.php?id=61594700879328" target="_blank" class="text-white hover:underline">Horek Rokom Haat Page</a></span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-globe text-amber-500 w-5"></i>
+                        <span>ওয়েবসাইট: <span class="text-slate-200">Horek Rokom Haat Online</span></span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Guarantees -->
+            <div class="space-y-3">
+                <h4 class="text-white font-bold border-b border-slate-800 pb-2 text-base">কেন কেনাকাটা করবেন?</h4>
+                <div class="grid grid-cols-1 gap-2 text-xs text-slate-400">
+                    <div class="flex items-center gap-2 bg-slate-800/50 p-2 rounded-lg">
+                        <i class="fas fa-check-circle text-emerald-400"></i>
+                        <span>সঠিক ও গুণগত মানসম্পন্ন পণ্য</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-800/50 p-2 rounded-lg">
+                        <i class="fas fa-shield-alt text-amber-400"></i>
+                        <span>দ্রুত ডেলিভারি সুবিধা</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-800/50 p-2 rounded-lg">
+                        <i class="fas fa-headset text-indigo-400"></i>
+                        <span>যেকোনো পণ্য অর্ডার নেওয়ার নিশ্চয়তা</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+            <p>© 2026 হরেক রকম হাট (Horek Rokom Haat). সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample Product Database
+        const products = [
+            {
+                id: 1,
+                title: 'ওয়্যারলেস ব্লুটুথ স্মার্টওয়াচ',
+                category: 'gadgets',
+                price: 1450,
+                oldPrice: 1850,
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop&q=60',
+                tag: 'গ্যাজেট'
+            },
+            {
+                id: 2,
+                title: 'প্রিমিয়াম নয়েজ ক্যানসেলিং হেডফোন',
+                category: 'gadgets',
+                price: 1890,
+                oldPrice: 2400,
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60',
+                tag: 'গ্যাজেট'
+            },
+            {
+                id: 3,
+                title: 'আকর্ষণীয় সুতি প্রিন্টেড শাড়ি',
+                category: 'fashion',
+                price: 1650,
+                oldPrice: 2100,
+                rating: 4.7,
+                image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&auto=format&fit=crop&q=60',
+                tag: 'ফ্যাশন'
+            },
+            {
+                id: 4,
+                title: 'প্রিমিয়াম ডিজাইনার কাজ করা পাঞ্জাবি',
+                category: 'fashion',
+                price: 1350,
+                oldPrice: 1700,
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500&auto=format&fit=crop&q=60',
+                tag: 'ফ্যাশন'
+            },
+            {
+                id: 5,
+                title: 'আধুনিক কাঠের ফ্রেমের ওয়াল পেইন্টিং',
+                category: 'homedecor',
+                price: 850,
+                oldPrice: 1200,
+                rating: 4.6,
+                image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=500&auto=format&fit=crop&q=60',
+                tag: 'হোম ডেকোর'
+            },
+            {
+                id: 6,
+                title: 'সুন্দর ইনডোর ডেকোরেটিভ ফুলদানি',
+                category: 'homedecor',
+                price: 620,
+                oldPrice: 850,
+                rating: 4.5,
+                image: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?w=500&auto=format&fit=crop&q=60',
+                tag: 'হোম ডেকোর'
+            },
+            {
+                id: 7,
+                title: 'প্রিমিয়াম ফ্লোরাল এম্ব্রয়ডারি কুশন কভার',
+                category: 'homedecor',
+                price: 490,
+                oldPrice: 650,
+                rating: 4.7,
+                image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=60',
+                tag: 'হোম ডেকোর'
+            },
+            {
+                id: 8,
+                title: 'অর্গানিক ডেইলি এসেনশিয়াল গ্রোসারি প্যাক',
+                category: 'essentials',
+                price: 1200,
+                oldPrice: 1400,
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60',
+                tag: 'নিত্যপ্রয়োজনীয়'
+            }
+        ];
+
+        let cart = [];
+        let activeCategory = 'all';
+
+        // Render Products
+        function renderProducts(itemsToRender) {
+            const grid = document.getElementById('productGrid');
+            const noProducts = document.getElementById('noProductsFound');
+            grid.innerHTML = '';
+
+            if (itemsToRender.length === 0) {
+                noProducts.classList.remove('hidden');
+                return;
+            } else {
+                noProducts.classList.add('hidden');
+            }
+
+            itemsToRender.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col justify-between group';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative overflow-hidden aspect-square bg-slate-100">
+                            <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x400/10B981/ffffff?text=Horek+Rokom+Haat'">
+                            <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-amber-300 text-[11px] font-bold px-2.5 py-1 rounded-full">
+                                ${product.tag}
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1">
+                                <i class="fas fa-star"></i>
+                                <span class="text-slate-600 font-semibold">${product.rating}</span>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-base leading-snug line-clamp-2 group-hover:text-emerald-700 transition">
+                                ${product.title}
+                            </h4>
+                            <div class="mt-3 flex items-baseline gap-2">
+                                <span class="text-lg font-extrabold text-emerald-700">৳ ${product.price}</span>
+                                <span class="text-xs text-slate-400 line-through">৳ ${product.oldPrice}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0 space-y-2">
+                        <button onclick="addToCart(${product.id})" class="w-full bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white font-bold py-2.5 rounded-xl transition text-xs flex items-center justify-center gap-2 border border-emerald-200 hover:border-emerald-600">
+                            <i class="fas fa-cart-plus"></i> কার্টে যোগ করুন
+                        </button>
+                        <button onclick="directWhatsAppOrder(${product.id})" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl transition text-xs flex items-center justify-center gap-1.5 shadow">
+                            <i class="fab fa-whatsapp text-sm"></i> সরাসরি অর্ডার
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Products by Category
+        function selectCategory(category) {
+            activeCategory = category;
+            
+            // Update UI Button Styles
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+
+            event.currentTarget.classList.remove('bg-white', 'text-slate-700');
+            event.currentTarget.classList.add('bg-emerald-600', 'text-white');
+
+            filterAndRender();
+        }
+
+        // Filter Products
+        function filterAndRender() {
+            const query = (document.getElementById('searchInput').value || document.getElementById('searchInputMobile').value || '').toLowerCase();
+            
+            let filtered = products;
+
+            if (activeCategory !== 'all') {
+                filtered = filtered.filter(p => p.category === activeCategory);
+            }
+
+            if (query.trim() !== '') {
+                filtered = filtered.filter(p => p.title.toLowerCase().includes(query));
+            }
+
+            renderProducts(filtered);
+        }
+
+        function filterProducts() {
+            filterAndRender();
+        }
+
+        function filterProductsMobile() {
+            filterAndRender();
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const item = products.find(p => p.id === productId);
+            const existing = cart.find(c => c.id === productId);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`"${item.title}" কার্টে যোগ করা হয়েছে!`);
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const totalItemsEl = document.getElementById('cartTotalItems');
+            const totalPriceEl = document.getElementById('cartTotalPrice');
+            const container = document.getElementById('cartItemsContainer');
+
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            badge.innerText = totalCount;
+            totalItemsEl.innerText = `${totalCount} টি`;
+            totalPriceEl.innerText = `৳ ${totalPrice}`;
+
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-slate-400">
+                        <i class="fas fa-shopping-basket text-4xl mb-2"></i>
+                        <p class="text-sm">আপনার কার্ট খালি রয়েছে</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cart.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'flex items-center justify-between bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs';
+                itemEl.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="${item.image}" alt="${item.title}" class="w-12 h-12 object-cover rounded-lg">
+                        <div>
+                            <h5 class="font-bold text-slate-800 line-clamp-1">${item.title}</h5>
+                            <span class="text-emerald-700 font-semibold">৳ ${item.price} x ${item.quantity}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 bg-slate-200 rounded text-slate-700 font-bold">-</button>
+                        <span class="font-bold">${item.quantity}</span>
+                        <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 bg-slate-200 rounded text-slate-700 font-bold">+</button>
+                    </div>
+                `;
+                container.appendChild(itemEl);
+            });
+        }
+
+        function changeQty(productId, delta) {
+            const item = cart.find(c => c.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(c => c.id !== productId);
+                }
+            }
+            updateCartUI();
+        }
+
+        // Toggle Cart Drawer
+        function toggleCartModal() {
+            const modal = document.getElementById('cartModal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Checkout via WhatsApp
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('আপনার কার্ট খালি! অনুগ্রহ করে পণ্য যুক্ত করুন।');
+                return;
+            }
+
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            let message = `*হরেক রকম হাট - নতুন অর্ডার*\n\n`;
+            message += `*অর্ডারকৃত পণ্যসমূহ:*\n`;
+
+            let grandTotal = 0;
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                grandTotal += itemTotal;
+                message += `${index + 1}. ${item.title} - ${item.quantity} টি (৳${itemTotal})\n`;
+            });
+
+            message += `\n*সর্বমোট মূল্য:* ৳${grandTotal}\n\n`;
+            message += `*গ্রাহকের তথ্য:*\n`;
+            message += `নাম: ${name || 'দেওয়া হয়নি'}\n`;
+            message += `মোবাইল: ${phone || 'দেওয়া হয়নি'}\n`;
+            message += `ঠিকানা: ${address || 'দেওয়া হয়নি'}\n`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/8801706998161?text=${encodedMessage}`, '_blank');
+        }
+
+        // Direct WhatsApp order for single item
+        function directWhatsAppOrder(productId) {
+            const item = products.find(p => p.id === productId);
+            if (!item) return;
+
+            let message = `*হরেক রকম হাট - সরাসরি প্রোডাক্ট অর্ডার*\n\n`;
+            message += `পণ্য: ${item.title}\n`;
+            message += `মূল্য: ৳${item.price}\n\n`;
+            message += `আমি এই পণ্যটি অর্ডার করতে চাই। অনুগ্রহ করে ডেলিভারির প্রক্রিয়াটি জানান।`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/8801706998161?text=${encodedMessage}`, '_blank');
+        }
+
+        // Toast Notification Function
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-bounce';
+            toast.innerHTML = `<i class="fas fa-check-circle text-emerald-400 text-base"></i> <span>${msg}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 2500);
+        }
+
+        // Initial Setup
+        window.onload = function() {
+            renderProducts(products);
+        }
+    </script>
+</body>
+</html>
